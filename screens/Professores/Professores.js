@@ -1,8 +1,17 @@
 import React from 'react'
+import { Button, Text } from 'react-native-paper'
 
-const Professores = () => {
+const Professores = ({navigation}) => {
   return (
-    <div>Professores</div>
+    <>
+    <Text style={{ textAlign: 'center', marginTop: 10 }}>Professores</Text>
+    <Button icon='plus'
+     mode='contained'
+     onPress={()=> navigation.push('professores-formulario')}
+     style={{marginTop: 10}}>
+      Novo
+      </Button>
+    </>
   )
 }
 

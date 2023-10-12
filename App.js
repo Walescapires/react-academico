@@ -3,10 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { PaperProvider } from "react-native-paper";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CursoStack from "./screens/Cursos/CursoStack";
-import Disciplinas from "./screens/Disciplinas/Disciplinas";
 import AlunosStack from "./screens/Alunos/AlunosStack";
 import ProfessoresStack from "./screens/Professores/ProfessoresStack";
 import TurmasStack from "./screens/Turmas/TurmasStack";
+import DisciplinaStack from "./screens/Disciplinas/DisciplinaStack";
 
 const Tab = createMaterialBottomTabNavigator();
 export default function App() {
@@ -26,7 +26,7 @@ export default function App() {
             />
             <Tab.Screen
               name="Disciplinas"
-              component={Disciplinas}
+              component={DisciplinaStack}
               options={{
                 tabBarIcon: () => (
                   <MaterialCommunityIcons name="book-open-variant" size={26} />
