@@ -1,8 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
-const ProfessoresFormulario = () => {
+const ProfessoresFormulario = ({navigation}) => {
   const [dados, setDados] = useState({})
 
   function handelChange(valor, campo){
@@ -10,7 +11,17 @@ const ProfessoresFormulario = () => {
   }
 
   function salvar(){
-    console.log
+    AsyncStorage.getItem('professores').then(resultado => {
+
+      const professores = JSON.parse(resultado) || []
+
+      professores.push(dados)
+      console.log(professores)
+  
+      AsyncStorage.setItem('professores', JSON.stringify(professores))
+  
+      navigation.goBack()
+    })
   }
   return (
     <>
@@ -66,7 +77,7 @@ const ProfessoresFormulario = () => {
         />
         <TextInput style={{ marginTop: 10 }}
           mode='outlined'
-          label='Numero'
+          label='Número'
           keyboardType='numeric'
           onChangeText={(valor) => handelChange(valor, 'numero')}
         />
