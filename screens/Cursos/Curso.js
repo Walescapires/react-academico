@@ -1,44 +1,55 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useFocusEffect } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
-import { Button, Card, Text } from 'react-native-paper'
+import { Button, Card, FAB, IconButton, Text } from 'react-native-paper'
 
 const Curso = ({ navigation }) => {
 
   const [cursos, setCursos] = useState([])
 
-  useEffect(() => {
-    AsyncStorage.getItem('cursos').then(resultado => {
-      resultado = JSON.parse(resultado) || []
+  useFocusEffect(
+    React.useCallback(() => {
 
-      console.log(resultado)
-      setCursos(resultado)
-    })
-  }, [])
+      AsyncStorage.getItem('cursos').then(resultado => {
+        resultado = JSON.parse(resultado) || []
+
+        console.log(resultado)
+        setCursos(resultado)
+      })
+
+    }, [])
+  );
 
   return (
     <>
-    <ScrollView>
-      <Text style={{ textAlign: 'center', marginTop: 10 }}>Cursos</Text>
-      <Button icon='plus'
-        mode='contained'
-        onPress={() => navigation.push('cursos-formulario')}
-        style={{ marginTop: 10 }}>
-        Novo
-      </Button>
+      <ScrollView style={{padding: 15 }}>
+       
 
-      {cursos.map(item => (
-        <Card>
-          <Card.Content>
-            <Text variant="bodyMedium">Nome: {item.nome}</Text>
-            <Text >Duração: {item.duracao}</Text>
-            <Text>Modalidade: {item.modalidade}</Text>
-          </Card.Content>
-        </Card>
-      ))}
+        {cursos.map((item, i) => (
+          <Card key={i} mode='outlined' style={{marginBottom: 10}}>
+            <Card.Content>
+              <Text variant="bodyMedium">Nome: {item.nome}</Text>
+              <Text >Duração: {item.duracao} sem.</Text>
+              <Text >Modalidade: {item.modalidade}</Text>
+            </Card.Content>
+            <Card.Actions>
+              <IconButton icon='pencil-outline'/>
+              <IconButton icon='delete'/>
+            </Card.Actions>
+          </Card>
+        ))}
       </ScrollView>
+      
+      <FAB
+          icon="plus"
+          size='small'   
+          style={{position: 'absolute', right: 5, bottom: 5}}
+          onPress={()=> navigation.push('cursos-formulario')}
+        />
     </>
   )
 }
+
 
 export default Curso
