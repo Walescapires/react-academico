@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
-const CursoFormulario = ({navigation}) => {
+const CursoFormulario = ({navigation, route}) => {
 
-  const [dados, setDados] = useState({})
+  const curso = route.params?.curso || {}
+  const id = route.params?.id
+  const [dados, setDados] = useState(curso)
   
 
   function handelChange(valor, campo){
@@ -18,8 +20,14 @@ const CursoFormulario = ({navigation}) => {
 
       const cursos = JSON.parse(resultado) || []
 
-      cursos.push(dados)
-      console.log(cursos)
+      if(id >= 0){
+        cursos.splice(id, 1, dados)
+
+      } else{
+        
+        cursos.push(dados)
+      }
+      
   
       AsyncStorage.setItem('cursos', JSON.stringify(cursos))
   
@@ -35,6 +43,7 @@ const CursoFormulario = ({navigation}) => {
         <TextInput style={{ marginTop: 10 }}
           mode='outlined'
           label='Nome'
+          value={dados.nome}
           onChangeText={(valor) => handelChange(valor, 'nome')}
         />
 
@@ -42,12 +51,14 @@ const CursoFormulario = ({navigation}) => {
           mode='outlined'
           label='Duração'
           keyboardType='decimal-pad'
+          value={dados.duracao}
           onChangeText={(valor) => handelChange(valor, 'duracao')}
         />
 
         <TextInput style={{ marginTop: 10 }}
           mode='outlined'
           label='Modalidade'
+          value={dados.modalidade}
           onChangeText={(valor) => handelChange(valor, 'modalidade')}
         />
 
