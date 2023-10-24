@@ -31,12 +31,14 @@ const TurmasFormulario = ({navigation}) => {
       <TextInput style={{ marginTop: 10 }}
         mode='outlined'
         label='Sala'
+        value={dados.sala}
         onChangeText={(valor) => handelChange(valor, 'sala')}
       />
 
 <TextInput style={{ marginTop: 10 }}
         mode='outlined'
         label='Turma'
+        value={dados.turma}
         onChangeText={(valor) => handelChange(valor, 'turma')}
       />
 
