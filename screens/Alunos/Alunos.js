@@ -18,6 +18,7 @@ const Alunos = ({ navigation }) => {
     React.useCallback(() => {
 
    carregarDados()
+
     }, [])
     );
 
@@ -43,7 +44,7 @@ const Alunos = ({ navigation }) => {
 
   return (
     <>
-    <ScrollView>
+    <ScrollView style={{ padding: 15 }}>
     {alunos.map((item, i) => (
           <Card key={i} mode='outlined' style={{marginBottom: 10}}>
             <Card.Content>
@@ -53,10 +54,12 @@ const Alunos = ({ navigation }) => {
               <Text >Telefone: {item.telefone}</Text>
             </Card.Content>
             <Card.Actions>
-              <IconButton icon='pencil-outline'
-              onPress={() => navigation.push('alunos-formulario', {id: i, curso: item})}
+              <IconButton
+              icon='pencil-outline'
+              onPress={() => navigation.push('alunos-formulario', {id: i, alunos: item})}
               />
-              <IconButton icon='delete'
+              <IconButton 
+              icon='delete'
               onPress={() => confirmarExclusao(i)}
               />
             </Card.Actions>

@@ -1,7 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
+import alunosValidator from '../../validator/alunosValidator'
+import { mask } from 'remask'
 
 const AlunosFormulario = ({ navigation, route }) => {
   const alunos = route.params?.alunos || {}
@@ -30,9 +33,10 @@ const AlunosFormulario = ({ navigation, route }) => {
         <Text style={{ textAlign: 'center' }}>Formulário do Aluno</Text>
         <Formik
           initialValues={alunos}
+          validationSchema={alunosValidator}
           onSubmit={values => salvar(values)}
         >
-          {({ values, handleChange, handleSubmit }) => (
+          {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => (
             <View>
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
@@ -43,10 +47,17 @@ const AlunosFormulario = ({ navigation, route }) => {
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
+                label='DataNascimento'
+                value={values.DataNascimento}
+                onChangeText={(value)=>{setFieldValue('DataNascimento', mask(value, '99/99/9999') )}}
+              />
+
+              <TextInput style={{ marginTop: 10 }}
+                mode='outlined'
                 label='CPF'
                 value={values.cpf}
                 keyboardType='decimal-pad'
-                onChangeText={handleChange('CPF')}
+                onChangeText={(value)=>{setFieldValue('cpf', mask(value, '999.999.999-99') )}}
               />
 
               <TextInput style={{ marginTop: 10 }}
@@ -68,14 +79,14 @@ const AlunosFormulario = ({ navigation, route }) => {
                 label='Telefone'
                 value={values.telefone}
                 keyboardType='phone-pad'
-                onChangeText={handleChange('telefone')}
+                onChangeText={(value)=>{setFieldValue('telefone', mask(value, '(99) 99999-9999') )}}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='CEP'
                 value={values.cep}
                 keyboardType='numeric'
-                onChangeText={handleChange('CEP')}
+                onChangeText={(value)=>{setFieldValue('cep', mask(value, '99.999-999') )}}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'

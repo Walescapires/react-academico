@@ -3,12 +3,25 @@ import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
-import * as Yup from 'yup';
+import cursoValidator from '../../validator/cursoValidator'
+
+
+
 
 const CursoFormulario = ({ navigation, route }) => {
 
-  const curso = route.params?.curso || {}
+  let curso = {
+    nome: '',
+    duracao: '',
+    modalidade: ''
+  }
+
   const id = route.params?.id
+
+  if(id >=0){
+    
+    curso = route.params?.curso
+  }
 
   function salvar(dados) {
 
@@ -30,15 +43,6 @@ const CursoFormulario = ({ navigation, route }) => {
 
   }
 
-  const cursoValidator = Yup.object().shape({
-    nome: Yup.string()
-    .min(5, 'Valor muito curto')
-    .max(10, 'Valor muito grande')
-    .required('Campo obrigatório'),
-    duracao: Yup.number(),
-    modalidade: Yup.string()
-  })
-
   return (
     <>
       <ScrollView style={{ margin: 15 }}>
@@ -49,7 +53,7 @@ const CursoFormulario = ({ navigation, route }) => {
           validationSchema={cursoValidator}
           onSubmit={values => salvar(values)}
         >
-          {({ values, handleChange, handleSubmit, errors, touched}) => (
+          {({ values, handleChange, handleSubmit, errors, touched, setFieldValue}) => (
             <View>
 
               <TextInput style={{ marginTop: 10 }}

@@ -15,8 +15,9 @@ const Curso = ({ navigation }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-
+      
       carregarDados()
+
     }, [])
   );
 
@@ -44,8 +45,6 @@ const Curso = ({ navigation }) => {
   return (
     <>
       <ScrollView style={{ padding: 15 }}>
-
-
         {cursos.map((item, i) => (
           <Card key={i} mode='outlined' style={{ marginBottom: 10 }}>
             <Card.Content>
