@@ -73,7 +73,6 @@ const Turmas = ({ navigation }) => {
           </Dialog>
         </Portal>
       </ScrollView>
-
       <FAB
         icon="plus"
         size='small'

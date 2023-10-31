@@ -51,70 +51,69 @@ return (
               onChangeText={handleChange('CPF')}
             />
 
-            <TextInput style={{ marginTop: 10 }}
-              mode='outlined'
-              label='Matricula'
-              value={values.matricula}
-              keyboardType='numeric'
-              onChangeText={handleChange('matricula')}
-            />
-            <TextInput style={{ marginTop: 10 }}
-              mode='outlined'
-              label='Email'
-              value={values.email}
-              keyboardType='email-address'
-              onChangeText={handleChange('email')}
-            />
-            <TextInput style={{ marginTop: 10 }}
-              mode='outlined'
-              label='Telefone'
-              value={values.telefone}
-              keyboardType='phone-pad'
-              onChangeText={handleChange('telefone')}
-            />
-            <TextInput style={{ marginTop: 10 }}
-              mode='outlined'
-              label='CEP'
-              value={values.cep}
-              keyboardType='numeric'
-              onChangeText={handleChange('CEP')}
-            />
-            <TextInput style={{ marginTop: 10 }}
-              mode='outlined'
-              label='Logradouro'
-              value={values.logradouro}
-              onChangeText={handleChange('logradouro')}
-            />
-            <TextInput style={{ marginTop: 10 }}
-              mode='outlined'
-              label='Complemento'
-              value={values.complemento}
-              onChangeText={handleChange('complemento')}
-            />
-            <TextInput style={{ marginTop: 10 }}
-              mode='outlined'
-              label='Número'
-              value={values.numero}
-              keyboardType='numeric'
-              onChangeText={handleChange('numero')}
-            />
-            <TextInput style={{ marginTop: 10 }}
-              mode='outlined'
-              label='Bairro'
-              value={values.bairro}
-              onChangeText={handleChange('bairro')}
-            />
-            <TextInput style={{ marginTop: 10 }}
-              mode='outlined'
-              label='Salário'
-              value={values.salario}
-              keyboardType='decimal-pad'
-              onChangeText={handleChange('salario')}
-            />
-            <Button onPress={handleSubmit}>Salvar</Button>
-          </View>
-        )}
-      </Formik>
+        <TextInput style={{ marginTop: 10 }}
+          mode='outlined'
+          label='Matricula'
+          value={dados.matricula}
+          keyboardType='numeric'
+          onChangeText={(valor) => handelChange(valor, 'matricula')}
+        />
+        <TextInput style={{ marginTop: 10 }}
+          mode='outlined'
+          label='Email'
+          value={dados.email}
+          keyboardType='email-address'
+          onChangeText={(valor) => handelChange(valor, 'email')}
+        />
+        <TextInput style={{ marginTop: 10 }}
+          mode='outlined'
+          label='Telefone'
+          value={dados.telefone}
+          keyboardType='phone-pad'
+          onChangeText={(valor) => handelChange(valor, 'telefone')}
+        />
+        <TextInput style={{ marginTop: 10 }}
+          mode='outlined'
+          label='CEP'
+          value={dados.cep}
+          keyboardType='numeric'
+          onChangeText={(valor) => handelChange(valor, 'CEP')}
+        />
+        <TextInput style={{ marginTop: 10 }}
+          mode='outlined'
+          label='Logradouro'
+          value={dados.logradouro}
+          onChangeText={(valor) => handelChange(valor, 'logradouro')}
+        />
+        <TextInput style={{ marginTop: 10 }}
+          mode='outlined'
+          label='Complemento'
+          value={dados.complemento}
+          onChangeText={(valor) => handelChange(valor, 'complemento')}
+        />
+        <TextInput style={{ marginTop: 10 }}
+          mode='outlined'
+          label='Número'
+          value={dados.numero}
+          keyboardType='numeric'
+          onChangeText={(valor) => handelChange(valor, 'numero')}
+        />
+        <TextInput style={{ marginTop: 10 }}
+          mode='outlined'
+          label='Bairro'
+          value={dados.bairro}
+          onChangeText={(valor) => handelChange(valor, 'bairro')}
+        />
+        <TextInput style={{ marginTop: 10 }}
+          mode='outlined'
+          label='Salário'
+          value={dados.salario}
+          keyboardType='decimal-pad'
+          onChangeText={(valor) => handelChange(valor, 'salario')}
+        />
+
+      <Button onPress={salvar}>Salvar</Button>
+
     </ScrollView>
   </>
 )
