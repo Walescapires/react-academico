@@ -76,7 +76,6 @@ const Curso = ({ navigation }) => {
             </Dialog.Actions>
           </Dialog>
         </Portal>
-
       </ScrollView>
 
       <FAB

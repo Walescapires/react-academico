@@ -7,8 +7,26 @@ import alunosValidator from '../../validator/alunosValidator'
 import { mask } from 'remask'
 
 const AlunosFormulario = ({ navigation, route }) => {
-  const alunos = route.params?.alunos || {}
+
+  let alunos = {
+    nome: '',
+    DataNascimento: '',
+    cpf: '',
+    matricula: '',
+    email: '',
+    telefone: '',
+    cep: '',
+    logradouro: '',
+    complemento: '',
+    numero: '',
+    bairro: '',
+  }
+
   const id = route.params?.id
+
+  if (id >= 0) {
+    alunos = route.params?.alunos
+  }
 
   function salvar(dados) {
     AsyncStorage.getItem('alunos').then(resultado => {
@@ -44,21 +62,36 @@ const AlunosFormulario = ({ navigation, route }) => {
                 value={values.nome}
                 onChangeText={handleChange('nome')}
               />
+              {(errors.nome && touched.nome) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.nome}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
-                label='DataNascimento'
+                label='Data de nascimento'
                 value={values.DataNascimento}
-                onChangeText={(value)=>{setFieldValue('DataNascimento', mask(value, '99/99/9999') )}}
+                onChangeText={(value) => { setFieldValue('DataNascimento', mask(value, '99/99/9999')) }}
               />
+              {(errors.DataNascimento && touched.DataNascimento) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.DataNascimento}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='CPF'
                 value={values.cpf}
                 keyboardType='decimal-pad'
-                onChangeText={(value)=>{setFieldValue('cpf', mask(value, '999.999.999-99') )}}
+                onChangeText={(value) => { setFieldValue('cpf', mask(value, '999.999.999-99')) }}
               />
+              {(errors.cpf && touched.cpf) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.cpf}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
@@ -67,6 +100,11 @@ const AlunosFormulario = ({ navigation, route }) => {
                 keyboardType='numeric'
                 onChangeText={handleChange('matricula')}
               />
+              {(errors.matricula && touched.matricula) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.matricula}
+                </Text>
+              }
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Email'
@@ -79,14 +117,14 @@ const AlunosFormulario = ({ navigation, route }) => {
                 label='Telefone'
                 value={values.telefone}
                 keyboardType='phone-pad'
-                onChangeText={(value)=>{setFieldValue('telefone', mask(value, '(99) 99999-9999') )}}
+                onChangeText={(value) => { setFieldValue('telefone', mask(value, '(99) 99999-9999')) }}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='CEP'
                 value={values.cep}
                 keyboardType='numeric'
-                onChangeText={(value)=>{setFieldValue('cep', mask(value, '99.999-999') )}}
+                onChangeText={(value) => { setFieldValue('cep', mask(value, '99.999-999')) }}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'

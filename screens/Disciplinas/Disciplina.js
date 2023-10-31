@@ -49,7 +49,7 @@ const Disciplina = ({navigation}) => {
           <Card key={i} mode='outlined' style={{marginBottom: 10}}>
             <Card.Content>
               <Text variant="bodyMedium">Nome: {item.nome}</Text>
-              <Text >Curso: {item.curso}</Text>
+              <Text >Curso: {item.curso_id}</Text>
             </Card.Content>
             <Card.Actions>
               <IconButton icon='pencil-outline'

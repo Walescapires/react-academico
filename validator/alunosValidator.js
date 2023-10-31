@@ -2,11 +2,21 @@ import * as Yup from 'yup';
 
 const alunosValidator = Yup.object().shape({
     nome: Yup.string()
-    .min(5, 'Valor muito curto')
-    .max(10, 'Valor muito grande')
     .required('Campo obrigatório'),
-    duracao: Yup.number(),
-    email: Yup.string().email(),
+    DataNascimento: Yup.date().default(() => new Date()),
+    cpf: Yup.string()
+    .required('Campo obrigatório'),
+    matricula: Yup.string()
+    .required('Campo obrigatório'),
+    email: Yup.string().email()
+    .required(),
+    telefone: Yup.string()
+    .required('Campo obrigatório'),
+    cep: Yup.string(),
+    logradouro: Yup.string(),
+    complemento: Yup.string(),
+    numero: Yup.number(),
+    bairro: Yup.string()
   })
 
   export default alunosValidator
