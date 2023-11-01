@@ -3,10 +3,28 @@ import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
+import { professoresValidator } from '../../validator/professoresValidator'
 
 const ProfessoresFormulario = ({ navigation, route }) => {
-  const professores = route.params?.professores || {}
+
+  let professores = {
+    nome: '',
+    cpf: '',
+    matricula: '',
+    email: '',
+    telefone: '',
+    cep: '',
+    logradouro: '',
+    complemento: '',
+    numero: '',
+    bairro: '',
+    salario: '',
+  }
   const id = route.params?.id
+
+  if (id >= 0) {
+    professores = route.params?.professores
+  }
 
   function salvar(dados) {
     AsyncStorage.getItem('professores').then(resultado => {
@@ -31,9 +49,10 @@ const ProfessoresFormulario = ({ navigation, route }) => {
         <Text style={{ textAlign: 'center' }}>Formulário do Professor</Text>
         <Formik
           initialValues={professores}
+          validationSchema={professoresValidator}
           onSubmit={values => salvar(values)}
         >
-          {({ values, handleChange, handleSubmit }) => (
+          {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => (
             <View>
 
               <TextInput style={{ marginTop: 10 }}
@@ -42,75 +61,96 @@ const ProfessoresFormulario = ({ navigation, route }) => {
                 value={values.nome}
                 onChangeText={handleChange('nome')}
               />
+              {(errors.nome && touched.nome) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.nome}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='CPF'
                 value={values.cpf}
                 keyboardType='decimal-pad'
-                onChangeText={handleChange('CPF')}
+                onChangeText={handleChange('cpf')}
               />
+              {(errors.cpf && touched.cpf) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.cpf}
+                </Text>
+              }
 
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Matricula'
-                value={dados.matricula}
+                value={values.matricula}
                 keyboardType='numeric'
-                onChangeText={(valor) => handelChange(valor, 'matricula')}
+                onChangeText={handleChange('matricula')}
               />
+              {(errors.matricula && touched.matricula) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.matricula}
+                </Text>
+              }
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Email'
-                value={dados.email}
+                value={values.email}
                 keyboardType='email-address'
-                onChangeText={(valor) => handelChange(valor, 'email')}
+                onChangeText={handleChange('email')}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Telefone'
-                value={dados.telefone}
+                value={values.telefone}
                 keyboardType='phone-pad'
-                onChangeText={(valor) => handelChange(valor, 'telefone')}
+                onChangeText={handleChange('telefone')}
               />
+              {(errors.telefone && touched.telefone) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.telefone}
+                </Text>
+              }
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='CEP'
-                value={dados.cep}
+                value={values.cep}
                 keyboardType='numeric'
-                onChangeText={(valor) => handelChange(valor, 'CEP')}
+                onChangeText={handleChange('cep')}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Logradouro'
-                value={dados.logradouro}
-                onChangeText={(valor) => handelChange(valor, 'logradouro')}
+                value={values.logradouro}
+                onChangeText={handleChange('logradouro')}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Complemento'
-                value={dados.complemento}
-                onChangeText={(valor) => handelChange(valor, 'complemento')}
+                value={values.complemento}
+                onChangeText={handleChange('complemento')}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Número'
-                value={dados.numero}
+                value={values.numero}
                 keyboardType='numeric'
-                onChangeText={(valor) => handelChange(valor, 'numero')}
+                onChangeText={handleChange('numero')}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Bairro'
-                value={dados.bairro}
-                onChangeText={(valor) => handelChange(valor, 'bairro')}
+                value={values.bairro}
+                onChangeText={handleChange('bairro')}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
                 label='Salário'
-                value={dados.salario}
+                value={values.salario}
                 keyboardType='decimal-pad'
-                onChangeText={(valor) => handelChange(valor, 'salario')}
+                onChangeText={handleChange('salario')}
               />
+              <Button onPress={handleSubmit}>Salvar</Button>
             </View>
           )}
         </Formik>

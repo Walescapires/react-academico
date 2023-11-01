@@ -11,7 +11,7 @@ const DisciplinaForm = ({ navigation, route }) => {
 
   let disciplinas = {
     nome: '',
-    curso_id: ''
+    curso_id: '',
   }
 
   const [cursos, setCursos] = useState([])

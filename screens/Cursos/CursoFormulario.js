@@ -11,7 +11,7 @@ const CursoFormulario = ({ navigation, route }) => {
   let curso = {
     nome: '',
     duracao: '',
-    modalidade: ''
+    modalidade: '',
   }
   const [selectedLanguage, setSelectedLanguage] = useState()
   
