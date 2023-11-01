@@ -72,7 +72,7 @@ const ProfessoresFormulario = ({ navigation, route }) => {
                 label='CPF'
                 value={values.cpf}
                 keyboardType='decimal-pad'
-                onChangeText={handleChange('cpf')}
+                onChangeText={(value) => { setFieldValue('cpf', mask(value, '999.999.999-99'))}}
               />
               {(errors.cpf && touched.cpf) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
@@ -104,7 +104,7 @@ const ProfessoresFormulario = ({ navigation, route }) => {
                 label='Telefone'
                 value={values.telefone}
                 keyboardType='phone-pad'
-                onChangeText={handleChange('telefone')}
+                onChangeText={(value) => { setFieldValue('telefone', mask(value, '(99) 99999-9999')) }}
               />
               {(errors.telefone && touched.telefone) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
@@ -116,7 +116,7 @@ const ProfessoresFormulario = ({ navigation, route }) => {
                 label='CEP'
                 value={values.cep}
                 keyboardType='numeric'
-                onChangeText={handleChange('cep')}
+                onChangeText={(value) => { setFieldValue('cep', mask(value, '99.999-999')) }}
               />
               <TextInput style={{ marginTop: 10 }}
                 mode='outlined'
